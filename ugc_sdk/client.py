@@ -24,10 +24,10 @@ class Client:
             if data["type"] == "hello":
                 await self.send("identify", {"token": token})
             else:
-                if data["type"] not in self.events:
+                if data["type"] in not self.events:
                     continue
                 for func in self.events[data["type"]]:
-                    if data is None:
+                    if data["data"] is None:
                         self.loop.create_task(func())
                     else:
                         self.loop.create_task(func(data["data"]))
