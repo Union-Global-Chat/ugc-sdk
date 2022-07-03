@@ -39,7 +39,7 @@ class Client:
             if type in self.events:
                 self.events[type].append(func)
             else:
-                self.events[type] = func
+                self.events[type] = [func]
             return func
         return decorator
 
