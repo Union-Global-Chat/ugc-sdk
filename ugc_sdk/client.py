@@ -19,7 +19,7 @@ class Client:
 
     async def connect(self, token: str) -> None:
         await self.protocol.connect()
-        while self.protocol.opened:
+        while self.protocol.open:
             data = loads(await self.protocol.recv())
             if data["type"] == "hello":
                 await self.send("identify", {"token": token})

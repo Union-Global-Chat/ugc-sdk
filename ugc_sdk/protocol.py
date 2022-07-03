@@ -19,8 +19,8 @@ class UgcProtocol:
             raise UgcProtocolError("Already connected")
 
     @property
-    def opened(self) -> bool:
-        return self.ws.opened if self.ws is not None else False
+    def open(self) -> bool:
+        return self.ws.open if self.ws is not None else False
 
     async def recv(self) -> str:
         return decompress(await self.ws.recv())
