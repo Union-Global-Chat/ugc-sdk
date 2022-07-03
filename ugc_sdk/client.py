@@ -24,8 +24,13 @@ class Client:
             if data["type"] == "hello":
                 await self.send("identify", {"token": token})
             else:
+                if data["type"] not in self.events:
+                    continue
                 for func in self.events[data["type"]]:
-                    self.loop.create_task(func(data["data"]))
+                    if data is None:
+                        self.loop.create_task(func())
+                    else:
+                        self.loop.create_task(func(data["data"]))
 
     def on(self, type):
         def decorator(func):

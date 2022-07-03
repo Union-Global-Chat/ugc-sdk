@@ -7,4 +7,6 @@ async def main():
     client = Client(loop=asyncio.get_running_loop())
     await client.connect(getenv("token"))
 
+    @client.on("identify")
+
 asyncio.run(main())
