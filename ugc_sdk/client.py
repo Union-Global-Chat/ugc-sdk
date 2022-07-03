@@ -8,12 +8,12 @@ from asyncio import AbstractEventLoop
 
 class Client:
     def __init__(
-        self, protocol: Optional[Any] = None, loop: AbstractEventLoop
+        self, protocol: Optional[Any] = None, *, loop: AbstractEventLoop
     ):
         if protocol:
             self.protocol = protocol
         else:
-            self.protocl = UgcProtocol()
+            self.protocol = UgcProtocol()
         self.events = {}
         self.loop = loop
 
@@ -21,7 +21,7 @@ class Client:
         await self.protocol.connect()
         while self.protocol.opened:
             data = loads(await self.protocol.recv())
-            if data["type"] == "hello:
+            if data["type"] == "hello":
                 await self.send("identify", {"token": token})
             else:
                 for func in self.events[data["type"]]:
