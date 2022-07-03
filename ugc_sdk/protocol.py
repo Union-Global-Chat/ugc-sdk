@@ -14,7 +14,7 @@ class UgcProtocol:
 
     async def connect(self) -> None:
         if self.ws is None:
-            self.ws = await connect("wss://ugc.renorari.net/api/v1/ws")
+            self.ws = await connect("wss://ugc.renorari.net/api/v1/gateway")
         else:
             raise UgcProtocolError("Already connected")
 
