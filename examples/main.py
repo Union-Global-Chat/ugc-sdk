@@ -8,5 +8,7 @@ async def main():
     await client.connect(getenv("token"))
 
     @client.on("identify")
+    async def login():
+        print("Logged in")
 
 asyncio.run(main())
