@@ -4,18 +4,19 @@ from orjson import loads, dumps
 
 from typing import Any, Optional
 from asyncio import AbstractEventLoop
+import asyncio
 
 
 class Client:
     def __init__(
-        self, protocol: Optional[Any] = None, *, loop: AbstractEventLoop
+        self, protocol: Optional[Any] = None, *, loop: AbstractEventLoop = None
     ):
         if protocol:
             self.protocol = protocol
         else:
             self.protocol = UgcProtocol()
         self.events = {}
-        self.loop = loop
+        self.loop = loop if self.loop is not None else asyncio.get_running_loop()
 
     async def connect(self, token: str) -> None:
         await self.protocol.connect()
