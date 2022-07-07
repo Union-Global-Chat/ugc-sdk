@@ -16,7 +16,7 @@ class Client:
         else:
             self.protocol = UgcProtocol()
         self.events = {}
-        self.loop = loop if self.loop is not None else asyncio.get_running_loop()
+        self.loop = loop if loop is not None else asyncio.get_running_loop()
 
     async def connect(self, token: str) -> None:
         await self.protocol.connect()
